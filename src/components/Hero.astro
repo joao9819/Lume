@@ -89,7 +89,7 @@ const h = clinica.hero;
   .hero-media {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    z-index: 2; /* a janela aberta cobre o texto; clip-path também recorta o clique */
     clip-path: inset(var(--w-t) var(--w-r) var(--w-b) var(--w-l) round var(--w-rad) var(--w-rad) 0 0);
     background: var(--color-areia);
   }
@@ -140,7 +140,7 @@ const h = clinica.hero;
 
   .hero-card {
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     left: var(--g);
     bottom: calc(var(--w-b) + 1.75rem);
     width: min(15rem, 48cqw);

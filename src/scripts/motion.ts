@@ -30,8 +30,9 @@ function titles() {
     const isHero = !!title.closest('[data-hero]');
     gsap.fromTo(
       lines,
-      { yPercent: 100 },
+      { y: 0, yPercent: 100 },
       {
+        y: 0,
         yPercent: 0,
         duration: 0.9,
         ease: EASE,
