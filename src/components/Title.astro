@@ -1,0 +1,17 @@
+---
+import { rich, plain } from '../lib/rich';
+
+interface Props {
+  lines: string[];
+  as?: 'h1' | 'h2';
+  id?: string;
+  class?: string;
+}
+const { lines, as: Tag = 'h2', id, class: cls = '' } = Astro.props;
+const size = Tag === 'h1' ? 'text-h1' : 'text-h2';
+---
+<Tag id={id} class:list={['display', size, cls]} data-reveal aria-label={plain(lines)}>
+  {lines.map((l) => (
+    <span class="line" aria-hidden="true"><span set:html={rich(l)} /></span>
+  ))}
+</Tag>

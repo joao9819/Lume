@@ -1,0 +1,92 @@
+---
+import clinica from '../data/clinica.json';
+import { waAvaliacao } from '../lib/wa';
+---
+<div id="topo-sentinela" class="pointer-events-none absolute left-0 top-0 h-6 w-px" aria-hidden="true"></div>
+<header id="site-header" class="site-header fixed inset-x-0 top-0 z-40">
+  <div class="wrap flex h-16 items-center justify-between gap-6 lg:h-[4.5rem]">
+    <a href="#topo" class="display text-[1.75rem] leading-none tracking-[0.08em]" aria-label={`${clinica.marca.nomeCompleto}, início`}>
+      {clinica.marca.nome}
+    </a>
+
+    <nav aria-label="Principal" class="hidden lg:block">
+      <ul class="flex items-center gap-9 text-[0.9375rem] font-medium">
+        {clinica.nav.map((item) => (
+          <li><a class="nav-link" href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a class="btn btn-terracota hidden !min-h-11 !px-5 text-[0.9375rem] sm:inline-flex" href={waAvaliacao()} target="_blank" rel="noopener">
+        {clinica.ctaPrincipal}
+      </a>
+      <button
+        type="button"
+        class="menu-btn inline-flex min-h-11 items-center px-1 text-[0.9375rem] font-medium lg:hidden"
+        aria-expanded="false"
+        aria-controls="menu-mobile"
+      >
+        <span class="menu-label">Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="menu-mobile" aria-label="Principal (celular)" class="menu-mobile lg:hidden" hidden>
+    <ul class="wrap flex flex-col pb-6 pt-2">
+      {clinica.nav.map((item) => (
+        <li><a class="display block py-3 text-[2rem] leading-none" href={item.href}>{item.label}</a></li>
+      ))}
+      <li class="pt-4 sm:hidden">
+        <a class="btn btn-terracota w-full" href={waAvaliacao()} target="_blank" rel="noopener">{clinica.ctaPrincipal}</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    transition: background-color 0.35s var(--ease-lume), backdrop-filter 0.35s var(--ease-lume);
+  }
+  .site-header.is-scrolled,
+  .site-header.is-open {
+    background-color: rgb(244 239 231 / 0.86);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+  .site-header.is-open { background-color: var(--color-linho); }
+  .nav-link { position: relative; padding-block: 0.25rem; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s var(--ease-lume);
+  }
+  .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+  @media (prefers-reduced-transparency: reduce) {
+    .site-header.is-scrolled { background-color: var(--color-linho); backdrop-filter: none; }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const sentinel = document.getElementById('topo-sentinela')!;
+  new IntersectionObserver(([e]) => header.classList.toggle('is-scrolled', !e.isIntersecting)).observe(sentinel);
+
+  const btn = header.querySelector<HTMLButtonElement>('.menu-btn')!;
+  const menu = document.getElementById('menu-mobile')!;
+  const label = btn.querySelector('.menu-label')!;
+  const setOpen = (open: boolean) => {
+    btn.setAttribute('aria-expanded', String(open));
+    menu.hidden = !open;
+    header.classList.toggle('is-open', open);
+    label.textContent = open ? 'Fechar' : 'Menu';
+  };
+  btn.addEventListener('click', () => setOpen(menu.hidden));
+  menu.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) setOpen(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { setOpen(false); btn.focus(); } });
+</script>

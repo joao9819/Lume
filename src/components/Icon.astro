@@ -1,0 +1,14 @@
+---
+// Ícones Phosphor (peso light), inline e decorativos
+const icons = import.meta.glob('/node_modules/@phosphor-icons/core/assets/light/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
+interface Props { name: string; class?: string }
+const { name, class: cls = '' } = Astro.props;
+const svg = icons[`/node_modules/@phosphor-icons/core/assets/light/${name}-light.svg`] ?? '';
+const html = svg.replace('<svg ', `<svg class="icon ${cls}" aria-hidden="true" focusable="false" `);
+---
+<Fragment set:html={html} />

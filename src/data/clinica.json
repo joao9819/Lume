@@ -1,0 +1,207 @@
+{
+  "ficticio": true,
+  "aviso": "Projeto conceitual de portfólio da Hexo Studio. Clínica, pessoas, depoimentos e números são fictícios.",
+  "marca": {
+    "nome": "LUME",
+    "nomeCompleto": "Lume Estética",
+    "descricao": "Estética facial e corporal desde 2017",
+    "fundacao": "2017",
+    "credito": "Projeto conceitual · Hexo Studio"
+  },
+  "seo": {
+    "title": "Lume Estética · Estética facial e corporal no Jardim Botânico, Ribeirão Preto",
+    "description": "Tratamentos faciais e corporais com avaliação por imagem, protocolo feito para a sua pele e uma hora inteira só sua. No Jardim Botânico, Ribeirão Preto.",
+    "url": "https://lume-estetica.vercel.app"
+  },
+  "contato": {
+    "whatsapp": "5516999990000",
+    "telefoneExibicao": "(16) 99999-0000",
+    "instagram": "@lume.estetica",
+    "instagramUrl": "https://instagram.com/lume.estetica",
+    "endereco": {
+      "rua": "Rua das Paineiras, 180",
+      "bairro": "Jardim Botânico",
+      "cidade": "Ribeirão Preto",
+      "uf": "SP",
+      "pais": "BR"
+    },
+    "horarios": [
+      { "dias": "Seg a sex", "horas": "9h–20h", "schema": "Mo-Fr 09:00-20:00" },
+      { "dias": "Sáb", "horas": "9h–14h", "schema": "Sa 09:00-14:00" }
+    ],
+    "mapaQuery": "Rua das Paineiras, 180, Jardim Botânico, Ribeirão Preto, SP"
+  },
+  "nav": [
+    { "label": "Tratamentos", "href": "#tratamentos" },
+    { "label": "O ritual", "href": "#ritual" },
+    { "label": "A clínica", "href": "#clinica" },
+    { "label": "Dúvidas", "href": "#duvidas" }
+  ],
+  "ctaPrincipal": "Agendar avaliação",
+  "mensagens": {
+    "avaliacao": "Olá! Quero agendar uma avaliação.",
+    "tratamento": "Olá! Quero agendar: {nome}",
+    "ritual": "Olá! Quero agendar: Ritual de Luz",
+    "primeiraVisita": "Olá! Quero agendar: Primeira visita"
+  },
+  "hero": {
+    "eyebrow": "Estética facial e corporal · Ribeirão Preto",
+    "titulo": ["RESULTADO NATURAL", "*é o nosso*", "LUXO"],
+    "subtitulo": "Tratamentos faciais e corporais com avaliação por imagem, protocolo feito para a sua pele e uma hora inteira só sua. No Jardim Botânico.",
+    "cta": "Agendar avaliação",
+    "link": "Ver tratamentos ↓",
+    "dados": ["Desde 2017", "+4.800 atendimentos", "Avaliação com imagem da pele"],
+    "cartao": ["Primeira visita", "Avaliação + limpeza", "R$ 290"],
+    "imagemAlt": "Rosto de mulher iluminado por luz lateral de janela"
+  },
+  "barraMobile": "Agendar pelo WhatsApp",
+  "abordagem": {
+    "eyebrow": "A abordagem Lume",
+    "titulo": ["O CAMINHO", "*até*", "A SUA MELHOR PELE"],
+    "paragrafos": [
+      "Antes de qualquer procedimento, a gente olha. Analisamos a sua pele com imagem de alta resolução, entendemos a sua rotina e só então decidimos o que ela precisa.",
+      "Sem excesso, sem promessa milagrosa e sem rosto \"feito\". O resultado que buscamos é aquele que ninguém percebe de onde veio, só que você está bem."
+    ],
+    "pilares": ["Olhar antes de tratar", "Protocolo sob medida", "Acompanhamento de verdade"]
+  },
+  "tratamentos": {
+    "eyebrow": "Tratamentos",
+    "titulo": ["CUIDADO", "*sob*", "MEDIDA"],
+    "link": "Agendar este →",
+    "itens": [
+      {
+        "id": "limpeza",
+        "categoria": "Facial",
+        "nome": "Limpeza de Pele Profunda",
+        "descricao": "Higienização, esfoliação enzimática, extração cuidadosa e máscara calmante.",
+        "duracao": "75 min",
+        "preco": "R$ 220",
+        "imagem": "tratamento-limpeza"
+      },
+      {
+        "id": "peeling",
+        "categoria": "Facial",
+        "nome": "Peeling de Renovação",
+        "descricao": "Ácidos em concentração ajustada para textura, manchas e viço.",
+        "duracao": "50 min",
+        "preco": "R$ 280",
+        "imagem": "tratamento-peeling"
+      },
+      {
+        "id": "microagulhamento",
+        "categoria": "Facial",
+        "nome": "Microagulhamento",
+        "descricao": "Estímulo de colágeno para poros, cicatrizes de acne e firmeza.",
+        "duracao": "60 min",
+        "preco": "R$ 450",
+        "imagem": "tratamento-microagulhamento"
+      },
+      {
+        "id": "led",
+        "categoria": "Facial",
+        "nome": "LED + Hidratação Profunda",
+        "descricao": "Luz terapêutica e ativos hidratantes para a pele cansada ou sensibilizada.",
+        "duracao": "40 min",
+        "preco": "R$ 160",
+        "imagem": "tratamento-led"
+      },
+      {
+        "id": "drenagem",
+        "categoria": "Corporal",
+        "nome": "Drenagem Linfática",
+        "descricao": "Manobras lentas que desincham e devolvem leveza ao corpo.",
+        "duracao": "60 min",
+        "preco": "R$ 190",
+        "imagem": "tratamento-drenagem"
+      },
+      {
+        "id": "bioestimulador",
+        "categoria": "Corporal",
+        "nome": "Bioestimulador de Colágeno",
+        "descricao": "Firmeza gradual e natural, com avaliação prévia obrigatória.",
+        "duracao": "Sob avaliação",
+        "preco": "a partir de R$ 1.800",
+        "imagem": "tratamento-bioestimulador"
+      }
+    ]
+  },
+  "ritual": {
+    "eyebrow": "A assinatura",
+    "titulo": ["RITUAL", "*de*", "LUZ"],
+    "nome": "Ritual de Luz",
+    "texto": "Nosso tratamento mais pedido. Noventa minutos de renovação enzimática, infusão de ceramidas, LED e massagem modeladora para devolver à pele a força da barreira e um brilho que dura semanas.",
+    "duracao": "90 min",
+    "investimento": "R$ 390",
+    "cta": "Reservar o Ritual de Luz",
+    "imagem": "ritual",
+    "imagemAlt": "Mãos aplicando cuidado no rosto, sob luz quente"
+  },
+  "passos": {
+    "titulo": ["TRÊS PASSOS,", "*sem*", "PRESSA"],
+    "itens": [
+      { "numero": "01", "nome": "Avaliação", "texto": "Conversa, imagem da pele e entendimento da sua rotina. 60 minutos." },
+      { "numero": "02", "nome": "Plano", "texto": "Você sai com um protocolo escrito: o que fazer, em que ordem e quanto custa." },
+      { "numero": "03", "nome": "Acompanhamento", "texto": "A cada sessão, comparamos a evolução e ajustamos o caminho." }
+    ]
+  },
+  "ambiente": {
+    "eyebrow": "A clínica",
+    "titulo": ["UMA HORA", "*que é só*", "SUA"],
+    "texto": "Linho, pedra e luz filtrada. Cada sala foi pensada para desacelerar o seu pulso antes do primeiro toque.",
+    "sentidos": [
+      { "nome": "Luz", "texto": "difusa e quente, nunca direta" },
+      { "nome": "Som", "texto": "baixo, feito para sumir" },
+      { "nome": "Aroma", "texto": "botânicos suaves" },
+      { "nome": "Toque", "texto": "mãos firmes, toalhas aquecidas" }
+    ],
+    "imagem": "ambiente",
+    "imagemAlt": "Sala da clínica com linho, pedra e luz filtrada"
+  },
+  "equipe": {
+    "titulo": ["QUEM CUIDA", "*de*", "VOCÊ"],
+    "pessoas": [
+      {
+        "nome": "Helena Prado",
+        "cargo": "Biomédica esteta, responsável técnica",
+        "texto": "Doze anos de pele, uma obsessão: resultado que parece seu.",
+        "imagem": "equipe-helena"
+      },
+      {
+        "nome": "Marina Lopes",
+        "cargo": "Esteticista e terapeuta corporal",
+        "texto": "Especialista em drenagem e protocolos para pele sensível.",
+        "imagem": "equipe-marina"
+      }
+    ]
+  },
+  "depoimentos": [
+    { "texto": "Saí da avaliação entendendo minha pele pela primeira vez. Três meses depois, parei de usar base.", "autora": "Camila R.", "idade": 34 },
+    { "texto": "Fiz o bioestimulador com medo de ficar artificial. Ninguém notou o procedimento, só que eu estava descansada.", "autora": "Patrícia M.", "idade": 47 },
+    { "texto": "É o único lugar em que eu desligo o celular sem esforço.", "autora": "Juliana F.", "idade": 29 }
+  ],
+  "oferta": {
+    "titulo": ["PRIMEIRA VISITA", "*com*", "AVALIAÇÃO"],
+    "texto": "Avaliação com imagem + limpeza de pele profunda, com plano escrito para levar para casa.",
+    "preco": "R$ 290",
+    "precoDe": "R$ 400",
+    "cta": "Quero agendar"
+  },
+  "faq": {
+    "titulo": ["DÚVIDAS", "*antes da*", "PRIMEIRA VISITA"],
+    "itens": [
+      { "pergunta": "Preciso de avaliação antes de qualquer tratamento?", "resposta": "Sim. Ela garante que o protocolo é o certo para você e evita gastar com o que a sua pele não precisa." },
+      { "pergunta": "Os procedimentos doem?", "resposta": "A maioria é confortável. No microagulhamento usamos anestésico tópico." },
+      { "pergunta": "Tem tempo de recuperação?", "resposta": "Limpeza, LED e drenagem não. Peeling e microagulhamento podem deixar a pele rosada por 1 a 3 dias." },
+      { "pergunta": "Em quanto tempo vejo resultado?", "resposta": "Viço e hidratação aparecem na hora. Textura e firmeza levam de 4 a 12 semanas." },
+      { "pergunta": "Quais as formas de pagamento?", "resposta": "Pix, débito e crédito em até 6x sem juros." },
+      { "pergunta": "Tem estacionamento?", "resposta": "Sim, gratuito para clientes." }
+    ]
+  },
+  "agendamento": {
+    "titulo": ["AGENDE", "*sem*", "PRESSA"],
+    "texto": "Escolha o tratamento e o melhor período. A gente responde pelo WhatsApp em até 2 horas no horário comercial.",
+    "opcoesExtras": ["Ritual de Luz", "Primeira visita"],
+    "periodos": ["Manhã", "Tarde", "Noite"],
+    "botao": "Enviar pelo WhatsApp"
+  }
+}

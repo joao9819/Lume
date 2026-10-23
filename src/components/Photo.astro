@@ -1,0 +1,41 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Fotos em /src/assets (nome do arquivo = chave). Sem foto: espaço marcado.
+const assets = import.meta.glob<{ default: ImageMetadata }>('../assets/*.{jpg,jpeg,png,webp}', { eager: true });
+
+interface Props {
+  name: string;
+  alt: string;
+  widths?: number[];
+  sizes: string;
+  class?: string;
+  imgClass?: string;
+  loading?: 'eager' | 'lazy';
+  priority?: boolean;
+  quality?: number;
+}
+const { name, alt, widths = [480, 720, 960, 1280], sizes, class: cls = '', imgClass = '', loading = 'lazy', priority = false, quality = 62 } = Astro.props;
+const entry = Object.entries(assets).find(([p]) => p.replace(/^.*\//, '').replace(/\.\w+$/, '') === name);
+const src = entry?.[1].default;
+---
+{src ? (
+  <Picture
+    src={src}
+    alt={alt}
+    widths={widths.filter((w) => w <= src.width)}
+    sizes={sizes}
+    formats={['avif', 'webp']}
+    quality={quality}
+    loading={priority ? 'eager' : loading}
+    decoding={priority ? 'sync' : 'async'}
+    fetchpriority={priority ? 'high' : 'auto'}
+    pictureAttributes={{ class: cls }}
+    class={imgClass}
+  />
+) : (
+  <div class:list={['photo-missing', cls]} role="img" aria-label={`Foto pendente: ${alt}`} data-missing={name}>
+    <span class="eyebrow">Foto pendente · {name}</span>
+  </div>
+)}

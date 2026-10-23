@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+import clinica from '../data/clinica.json';
+import frauncesNormal from '../fonts/fraunces-lume-normal.woff2?url';
+import frauncesItalic from '../fonts/fraunces-lume-italic.woff2?url';
+import hanken from '../fonts/hanken-grotesk-latin.woff2?url';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = clinica.seo.title, description = clinica.seo.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#F4EFE7" />
+    <meta name="robots" content="noindex" />
+    <link rel="preload" href={frauncesNormal} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={frauncesItalic} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={hanken} as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      // Estado inicial das animações só quando há JS e o usuário aceita movimento.
+      (function () {
+        var d = document.documentElement;
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.classList.add('motion');
+          setTimeout(function () { if (!d.classList.contains('motion-ready')) d.classList.remove('motion'); }, 3500);
+        }
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-cafe focus:px-4 focus:py-3 focus:text-linho">Pular para o conteúdo</a>
+    <slot />
+  </body>
+</html>

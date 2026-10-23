@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import MobileCTA from '../components/MobileCTA.astro';
+---
+<Base>
+  <Header />
+  <main id="conteudo">
+    <Hero />
+    <section id="tratamentos" class="min-h-[120vh] bg-areia"><div class="wrap py-24"><p class="eyebrow text-argila">Prévia: demais seções entram após aprovação</p></div></section>
+    <section id="agendar" class="min-h-[60vh] bg-linho"></section>
+  </main>
+  <MobileCTA />
+</Base>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) import('../scripts/motion');
+</script>

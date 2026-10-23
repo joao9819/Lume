@@ -1,0 +1,161 @@
+---
+import clinica from '../data/clinica.json';
+import Title from './Title.astro';
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+import { waAvaliacao } from '../lib/wa';
+
+const h = clinica.hero;
+---
+<section id="topo" class="hero" aria-labelledby="hero-titulo" data-hero>
+  <!-- Camada da foto: full-bleed, recortada pela janela em arco (clip-path) -->
+  <div class="hero-media" data-hero-media>
+    <Photo
+      name="hero"
+      alt={h.imagemAlt}
+      sizes="100vw"
+      widths={[640, 900, 1280, 1600, 2000]}
+      priority
+      quality={55}
+      class="hero-pic"
+      imgClass="hero-img"
+    />
+  </div>
+  <div class="hero-window" data-hero-window aria-hidden="true"></div>
+
+  <div class="hero-content wrap grid-12" data-hero-content>
+    <div class="hero-text col-span-12 lg:col-span-7">
+      <div>
+        <p class="eyebrow text-argila" data-fade>{h.eyebrow}</p>
+        <Title as="h1" id="hero-titulo" lines={h.titulo} class="hero-h1 mt-6 lg:mt-8" />
+        <p class="mt-7 max-w-[52ch] text-argila lg:mt-9" data-fade>{h.subtitulo}</p>
+        <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 lg:mt-10" data-fade>
+          <a class="btn btn-terracota" href={waAvaliacao()} target="_blank" rel="noopener">{h.cta}</a>
+          <a class="link-u inline-flex items-center gap-2 font-medium" href="#tratamentos">
+            {h.link.replace(' ↓', '')}<Icon name="arrow-down" />
+          </a>
+        </div>
+      </div>
+      <p class="hero-dados text-[0.875rem] text-argila" data-fade>
+        {h.dados.map((d, i) => (<>{i > 0 && <span class="px-2" aria-hidden="true">·</span>}<span>{d}</span></>))}
+      </p>
+    </div>
+  </div>
+
+  <a class="hero-card" href="#oferta" data-hero-card>
+    <span class="eyebrow text-argila">{h.cartao[0]}</span>
+    <span class="mt-1 block font-medium">{h.cartao[1]}</span>
+    <span class="display mt-2 block text-[1.75rem] leading-none">{h.cartao[2]}</span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    /* Geometria compartilhada: grade 12 colunas e a janela em arco */
+    container-type: inline-size;
+    --g: var(--spacing-gutter);
+    --gap: clamp(1rem, 0.6rem + 1.25vw, 2rem);
+    --outer: max(0px, (100cqw - 90rem) / 2);
+    --content: calc(100cqw - 2 * var(--outer) - 2 * var(--g));
+    --col: calc((var(--content) - 11 * var(--gap)) / 12);
+
+    /* Celular: arco de 70vw alinhado à direita, na base do hero */
+    --w-w: 70cqw;
+    --w-h: calc(70cqw * 1.3);
+    --w-r: var(--g);
+    --w-l: calc(100cqw - var(--w-w) - var(--w-r));
+    --w-b: 2.5rem;
+    --w-t: calc(100% - var(--w-b) - var(--w-h));
+    --w-rad: calc(var(--w-w) / 2);
+
+    position: relative;
+    min-height: 100svh;
+    background: var(--color-linho);
+    overflow: clip;
+    isolation: isolate;
+  }
+  @media (min-width: 1024px) {
+    .hero {
+      /* Desktop: colunas 8–12, 85% da altura */
+      --w-w: calc(5 * var(--col) + 4 * var(--gap));
+      --w-r: calc(var(--outer) + var(--g));
+      --w-l: calc(100cqw - var(--w-w) - var(--w-r));
+      --w-b: 4%;
+      --w-t: 11%;
+      --w-h: 85%;
+    }
+  }
+
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    clip-path: inset(var(--w-t) var(--w-r) var(--w-b) var(--w-l) round var(--w-rad) var(--w-rad) 0 0);
+    background: var(--color-areia);
+  }
+  .hero-media :global(.hero-pic),
+  .hero-media :global(.hero-img),
+  .hero-media :global(.photo-missing) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-media :global(.hero-img) {
+    object-fit: cover;
+    object-position: var(--focus, 72% 40%);
+  }
+  .hero-window {
+    position: absolute;
+    top: var(--w-t);
+    right: var(--w-r);
+    bottom: var(--w-b);
+    left: var(--w-l);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding-top: calc(4rem + clamp(2rem, 1rem + 4vw, 4.5rem));
+    /* espaço do arco no celular */
+    padding-bottom: calc(var(--w-h) + var(--w-b) + 2.5rem);
+  }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+  .hero-dados {
+    border-top: 1px solid rgb(106 93 82 / 0.35);
+    padding-top: 1rem;
+  }
+  @media (min-width: 1024px) {
+    .hero-content {
+      min-height: 100svh;
+      padding-top: calc(4.5rem + clamp(2rem, 0.5rem + 3vw, 4rem));
+      padding-bottom: 4svh;
+    }
+  }
+
+  .hero-card {
+    position: absolute;
+    z-index: 2;
+    left: var(--g);
+    bottom: calc(var(--w-b) + 1.75rem);
+    width: min(15rem, 48cqw);
+    padding: 1.1rem 1.25rem 1.25rem;
+    background: var(--color-areia);
+    border-radius: var(--radius-sm);
+    color: var(--color-cafe);
+    transition: transform 0.3s var(--ease-lume);
+  }
+  .hero-card:hover { transform: translateY(-2px); }
+  @media (min-width: 1024px) {
+    .hero-card {
+      left: calc(var(--w-l) - 3.5rem);
+      bottom: calc(var(--w-b) + 3rem);
+      width: 15.5rem;
+    }
+  }
+</style>

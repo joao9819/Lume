@@ -1,0 +1,38 @@
+---
+import clinica from '../data/clinica.json';
+import { waAvaliacao } from '../lib/wa';
+---
+<div class="mobile-cta lg:hidden" data-mobile-cta>
+  <a class="btn btn-terracota w-full !min-h-14 !rounded-none" href={waAvaliacao()} target="_blank" rel="noopener">
+    {clinica.barraMobile}
+  </a>
+</div>
+
+<style>
+  .mobile-cta {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 30;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--color-terracota);
+    transition: transform 0.35s var(--ease-lume), visibility 0s linear 0s;
+  }
+  .mobile-cta.is-hidden {
+    transform: translateY(110%);
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 1, 1), visibility 0s linear 0.3s;
+  }
+  @media (max-width: 1023.98px) {
+    :global(body) { padding-bottom: calc(3.5rem + env(safe-area-inset-bottom)); }
+  }
+</style>
+
+<script>
+  // Some quando a seção de agendamento está visível
+  const bar = document.querySelector<HTMLElement>('[data-mobile-cta]');
+  const target = document.getElementById('agendar');
+  if (bar && target) {
+    new IntersectionObserver(([e]) => bar.classList.toggle('is-hidden', e.isIntersecting), { threshold: 0.05 }).observe(target);
+  }
+</script>
