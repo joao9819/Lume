@@ -1,0 +1,21 @@
+---
+import clinica from '../data/clinica.json';
+import Title from './Title.astro';
+import { waLink } from '../lib/wa';
+const o = clinica.oferta;
+---
+<section id="oferta" class="on-terracota bg-terracota py-[clamp(4rem,3rem+5vw,7.5rem)] text-white" aria-labelledby="oferta-titulo">
+  <div class="wrap grid-12 items-end gap-y-10">
+    <div class="col-span-12 lg:col-span-8">
+      <Title id="oferta-titulo" lines={o.titulo} />
+      <p class="measure mt-6" data-rise>{o.texto}</p>
+    </div>
+    <div class="col-span-12 flex flex-wrap items-end justify-between gap-8 lg:col-span-4 lg:flex-col lg:items-start" data-rise>
+      <p>
+        <span class="display block text-[clamp(3rem,2rem+4vw,5rem)] leading-none">{o.preco}</span>
+        <span class="mt-2 block">(de <s>{o.precoDe}</s>)</span>
+      </p>
+      <a class="btn btn-linho" href={waLink(clinica.mensagens.primeiraVisita)} target="_blank" rel="noopener">{o.cta}</a>
+    </div>
+  </div>
+</section>

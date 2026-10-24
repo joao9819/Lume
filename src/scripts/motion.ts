@@ -108,7 +108,7 @@ function slits() {
       once: true,
       onEnter: () => {
         const t = shape();
-        gsap.fromTo(el, { clipPath: t.from }, { clipPath: t.to, duration: 1.2, ease: 'power3.inOut', onComplete: () => gsap.set(el, { clearProps: 'clipPath' }) });
+        gsap.fromTo(el, { clipPath: t.from }, { clipPath: t.to, duration: 1.2, ease: 'power3.inOut', onComplete: () => gsap.set(el, { clipPath: 'none' }) });
         if (img) gsap.fromTo(img, { scale: 1.12 }, { scale: 1, duration: 1.6, ease: EASE });
       },
     });

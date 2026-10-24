@@ -1,0 +1,39 @@
+---
+import clinica from '../data/clinica.json';
+import Title from './Title.astro';
+import Photo from './Photo.astro';
+import { waLink } from '../lib/wa';
+const r = clinica.ritual;
+---
+<section id="ritual" class="on-cafe bg-cafe py-[var(--spacing-section)] text-linho" aria-labelledby="ritual-titulo">
+  <div class="wrap grid-12 items-center gap-y-14">
+    <div class="col-span-12 md:col-span-6 lg:col-span-5">
+      <div class="arch-frame mx-auto w-[min(100%,26rem)] md:w-full" data-slit>
+        <Photo
+          name={r.imagem}
+          alt={r.imagemAlt}
+          sizes="(min-width: 1024px) 36vw, (min-width: 768px) 48vw, 90vw"
+          widths={[480, 720, 960, 1200]}
+          class="block aspect-[4/5] w-full"
+          imgClass="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 lg:col-span-6 lg:col-start-7">
+      <p class="eyebrow text-pedra" data-rise>{r.eyebrow}</p>
+      <Title id="ritual-titulo" lines={r.titulo} class="mt-6" />
+      <p class="measure mt-8 text-pedra" data-rise>{r.texto}</p>
+      <dl class="mt-10 grid max-w-md grid-cols-2 border-t border-pedra/30 pt-6" data-rise>
+        <div>
+          <dt class="text-[0.875rem] text-pedra">Duração</dt>
+          <dd class="display mt-1 text-h3">{r.duracao}</dd>
+        </div>
+        <div class="border-l border-pedra/30 pl-6">
+          <dt class="text-[0.875rem] text-pedra">Investimento</dt>
+          <dd class="display mt-1 text-h3">{r.investimento}</dd>
+        </div>
+      </dl>
+      <a class="btn btn-terracota mt-10" href={waLink(clinica.mensagens.ritual)} target="_blank" rel="noopener" data-rise>{r.cta}</a>
+    </div>
+  </div>
+</section>

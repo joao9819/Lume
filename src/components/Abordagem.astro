@@ -1,0 +1,23 @@
+---
+import clinica from '../data/clinica.json';
+import Title from './Title.astro';
+const a = clinica.abordagem;
+---
+<section id="abordagem" class="bg-linho py-[var(--spacing-section)]" aria-labelledby="abordagem-titulo">
+  <div class="wrap grid-12 gap-y-12">
+    <div class="col-span-12 lg:col-span-9">
+      <p class="eyebrow text-argila" data-rise>{a.eyebrow}</p>
+      <Title id="abordagem-titulo" lines={a.titulo} class="mt-6" />
+    </div>
+    <div class="col-span-12 grid gap-6 md:col-span-8 md:col-start-5 lg:col-span-6 lg:col-start-6">
+      {a.paragrafos.map((p) => <p class="measure text-argila first:text-cafe" data-rise>{p}</p>)}
+    </div>
+    <ol class="col-span-12 mt-8 grid border-t border-argila/30 md:grid-cols-3 lg:mt-16">
+      {a.pilares.map((p) => (
+        <li class="border-b border-argila/30 py-6 md:border-b-0 md:py-8 md:pr-8 md:[&:not(:first-child)]:border-l md:[&:not(:first-child)]:pl-8" data-rise>
+          <span class="display text-h3 block">{p}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

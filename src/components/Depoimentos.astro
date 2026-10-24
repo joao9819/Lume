@@ -1,0 +1,27 @@
+---
+import clinica from '../data/clinica.json';
+const d = clinica.depoimentos;
+---
+<section id="depoimentos" class="bg-areia py-[var(--spacing-section)]" aria-label="Depoimentos">
+  <ul class="wrap grid gap-16 lg:gap-24" role="list">
+    {d.map((q, i) => (
+      <li class:list={['depo', i === 1 && 'lg:ml-[25%]', i === 2 && 'lg:ml-[8.33%]']} data-rise>
+        <figure>
+          <blockquote class="ital depo-texto text-cafe">
+            <p>“{q.texto}”</p>
+          </blockquote>
+          <figcaption class="mt-6 text-[0.9375rem] font-medium text-argila">{q.autora}, {q.idade}</figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .depo-texto {
+    color: var(--color-cafe);
+    font-size: clamp(1.75rem, 1.2rem + 2.75vw, 3.5rem);
+    line-height: 1.12;
+    max-width: 24ch;
+  }
+</style>

@@ -2,11 +2,11 @@
 import clinica from '../data/clinica.json';
 import { waAvaliacao } from '../lib/wa';
 ---
-<div class="mobile-cta lg:hidden" data-mobile-cta>
+<aside class="mobile-cta lg:hidden" aria-label="Agendamento rápido" data-mobile-cta>
   <a class="btn btn-terracota w-full !min-h-14 !rounded-none" href={waAvaliacao()} target="_blank" rel="noopener">
     {clinica.barraMobile}
   </a>
-</div>
+</aside>
 
 <style>
   .mobile-cta {

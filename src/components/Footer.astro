@@ -1,0 +1,35 @@
+---
+import clinica from '../data/clinica.json';
+const m = clinica.marca;
+---
+<footer class="on-cafe bg-cafe pt-[clamp(4rem,3rem+5vw,8rem)] pb-8 text-linho">
+  <div class="wrap">
+    <div class="grid gap-10 md:grid-cols-[1fr_auto_auto] md:gap-16">
+      <p class="text-pedra">{m.descricao}</p>
+      <nav aria-label={clinica.footer.ancoras}>
+        <ul class="grid gap-2" role="list">
+          {clinica.nav.map((n) => <li><a class="link-u" href={n.href}>{n.label}</a></li>)}
+          <li><a class="link-u" href="#agendar">{clinica.ctaPrincipal}</a></li>
+        </ul>
+      </nav>
+      <ul class="grid content-start gap-2" role="list">
+        <li><a class="link-u" href={clinica.contato.instagramUrl} target="_blank" rel="noopener">Instagram</a></li>
+        <li class="text-pedra">{clinica.contato.instagram}</li>
+      </ul>
+    </div>
+    <p class="wordmark display" aria-hidden="true">{m.nome}</p>
+    <p class="mt-6 text-[0.875rem] text-pedra">{m.credito}</p>
+  </div>
+</footer>
+
+<style>
+  .wordmark {
+    margin-top: clamp(3rem, 2rem + 4vw, 6rem);
+    font-size: calc((min(100vw, 90rem) - 2 * var(--spacing-gutter)) * 0.392);
+    line-height: 0.78;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: var(--color-linho);
+    white-space: nowrap;
+  }
+</style>

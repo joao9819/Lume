@@ -2,15 +2,35 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import Abordagem from '../components/Abordagem.astro';
+import Tratamentos from '../components/Tratamentos.astro';
+import Ritual from '../components/Ritual.astro';
+import Passos from '../components/Passos.astro';
+import Ambiente from '../components/Ambiente.astro';
+import Equipe from '../components/Equipe.astro';
+import Depoimentos from '../components/Depoimentos.astro';
+import Oferta from '../components/Oferta.astro';
+import Faq from '../components/Faq.astro';
+import Agendamento from '../components/Agendamento.astro';
+import Footer from '../components/Footer.astro';
 import MobileCTA from '../components/MobileCTA.astro';
 ---
 <Base>
   <Header />
   <main id="conteudo">
     <Hero />
-    <section id="tratamentos" class="min-h-[120vh] bg-areia"><div class="wrap py-24"><p class="eyebrow text-argila">Prévia: demais seções entram após aprovação</p></div></section>
-    <section id="agendar" class="min-h-[60vh] bg-linho"></section>
+    <Abordagem />
+    <Tratamentos />
+    <Ritual />
+    <Passos />
+    <Ambiente />
+    <Equipe />
+    <Depoimentos />
+    <Oferta />
+    <Faq />
+    <Agendamento />
   </main>
+  <Footer />
   <MobileCTA />
 </Base>
 

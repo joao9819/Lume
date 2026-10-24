@@ -11,6 +11,32 @@ interface Props {
 }
 const { title = clinica.seo.title, description = clinica.seo.description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const og = new URL('/og.jpg', Astro.site).href;
+const c = clinica.contato;
+
+// Dados estruturados (fictícios, ver clinica.json)
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BeautySalon',
+  name: clinica.marca.nomeCompleto,
+  description,
+  url: Astro.site?.href,
+  image: og,
+  telephone: `+${c.whatsapp}`,
+  priceRange: 'R$ 160 - R$ 1.800',
+  foundingDate: clinica.marca.fundacao,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: c.endereco.rua,
+    addressLocality: c.endereco.cidade,
+    addressRegion: c.endereco.uf,
+    addressCountry: c.endereco.pais,
+  },
+  areaServed: `${c.endereco.bairro}, ${c.endereco.cidade}`,
+  openingHours: c.horarios.map((h) => h.schema),
+  sameAs: [c.instagramUrl],
+  paymentAccepted: 'Pix, débito, crédito',
+};
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -22,6 +48,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#F4EFE7" />
     <meta name="robots" content="noindex" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={clinica.marca.nomeCompleto} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Lume Estética: Resultado natural é o nosso luxo" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <link rel="preload" href={frauncesNormal} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={frauncesItalic} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={hanken} as="font" type="font/woff2" crossorigin />

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://projectlume231.vercel.app/sitemap-index.xml

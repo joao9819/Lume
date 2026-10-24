@@ -27,8 +27,9 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "playwright": "^1.64.1",
     "@fontsource-variable/fraunces": "^5.3.0",
-    "@fontsource-variable/hanken-grotesk": "^5.3.0"
+    "@fontsource-variable/hanken-grotesk": "^5.3.0",
+    "axe-core": "^4.14.0",
+    "playwright": "^1.64.1"
   }
 }

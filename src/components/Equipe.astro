@@ -1,0 +1,30 @@
+---
+import clinica from '../data/clinica.json';
+import Title from './Title.astro';
+import Photo from './Photo.astro';
+const e = clinica.equipe;
+---
+<section id="equipe" class="bg-linho py-[var(--spacing-section)]" aria-labelledby="equipe-titulo">
+  <div class="wrap">
+    <Title id="equipe-titulo" lines={e.titulo} />
+    <div class="grid-12 mt-14 gap-y-16 lg:mt-20">
+      {e.pessoas.map((p, i) => (
+        <figure class:list={['col-span-12 sm:col-span-6', i === 0 ? 'lg:col-span-6' : 'lg:col-span-4 lg:col-start-8 lg:mt-40']} data-rise>
+          <Photo
+            name={p.imagem}
+            alt={`${p.nome}, ${p.cargo}`}
+            sizes="(min-width: 1024px) 40vw, (min-width: 640px) 45vw, 90vw"
+            widths={[480, 720, 960]}
+            class="block aspect-[4/5] w-full overflow-hidden rounded-sm"
+            imgClass="h-full w-full object-cover"
+          />
+          <figcaption class="mt-6">
+            <p class="display text-h3">{p.nome}</p>
+            <p class="mt-1 text-[0.9375rem] font-medium text-argila">{p.cargo}</p>
+            <p class="measure mt-4">{p.texto}</p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

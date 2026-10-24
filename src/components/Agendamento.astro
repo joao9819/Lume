@@ -1,0 +1,215 @@
+---
+import clinica from '../data/clinica.json';
+import Title from './Title.astro';
+import Icon from './Icon.astro';
+const a = clinica.agendamento;
+const c = clinica.contato;
+const opcoes = [...clinica.tratamentos.itens.map((t) => t.nome), ...a.opcoesExtras];
+const mapaSrc = `https://www.google.com/maps?q=${encodeURIComponent(c.mapaQuery)}&output=embed`;
+const telHref = `tel:+${c.whatsapp}`;
+---
+<section id="agendar" class="bg-areia py-[var(--spacing-section)]" aria-labelledby="agendar-titulo">
+  <div class="wrap grid-12 gap-y-16">
+    <div class="col-span-12 lg:col-span-7">
+      <Title id="agendar-titulo" lines={a.titulo} />
+      <p class="measure mt-6 text-argila" data-rise>{a.texto}</p>
+
+      <form
+        id="form-agendar"
+        class="form mt-12 grid gap-7 sm:grid-cols-2"
+        novalidate
+        data-wa={c.whatsapp}
+        data-msg={JSON.stringify(clinica.mensagens.formulario)}
+        data-rise
+      >
+        <div class="field sm:col-span-1">
+          <label for="f-nome">{a.campos.nome.label}</label>
+          <input id="f-nome" name="nome" type="text" autocomplete="name" required minlength="2" aria-describedby="e-nome" />
+          <p id="e-nome" class="erro" data-msg={a.campos.nome.erro} aria-live="polite"></p>
+        </div>
+        <div class="field sm:col-span-1">
+          <label for="f-whats">{a.campos.whatsapp.label}</label>
+          <input id="f-whats" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" required placeholder={a.campos.whatsapp.placeholder} maxlength="15" aria-describedby="e-whats" />
+          <p id="e-whats" class="erro" data-msg={a.campos.whatsapp.erro} aria-live="polite"></p>
+        </div>
+        <div class="field sm:col-span-2">
+          <label for="f-trat">{a.campos.tratamento.label}</label>
+          <div class="select">
+            <select id="f-trat" name="tratamento" required aria-describedby="e-trat">
+              <option value="">{a.campos.tratamento.vazio}</option>
+              {opcoes.map((o) => <option value={o}>{o}</option>)}
+            </select>
+            <Icon name="caret-down" class="select-caret" />
+          </div>
+          <p id="e-trat" class="erro" data-msg={a.campos.tratamento.erro} aria-live="polite"></p>
+        </div>
+        <fieldset class="field sm:col-span-2" aria-describedby="e-periodo">
+          <legend>{a.campos.periodo.label}</legend>
+          <div class="periodos">
+            {a.periodos.map((p) => (
+              <label class="periodo">
+                <input type="radio" name="periodo" value={p} required />
+                <span>{p}</span>
+              </label>
+            ))}
+          </div>
+          <p id="e-periodo" class="erro" data-msg={a.campos.periodo.erro} aria-live="polite"></p>
+        </fieldset>
+        <div class="field sm:col-span-2">
+          <label for="f-msg">{a.campos.mensagem.label} <span class="font-normal text-argila">({a.campos.mensagem.opcional})</span></label>
+          <textarea id="f-msg" name="mensagem" rows="4"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <button type="submit" class="btn btn-terracota w-full sm:w-auto">{a.botao}</button>
+          <p class="mt-4 text-[0.9375rem] text-argila" role="status" data-status data-msg={a.enviado}></p>
+        </div>
+      </form>
+    </div>
+
+    <aside class="col-span-12 lg:col-span-4 lg:col-start-9" aria-label="Endereço e contato">
+      <address class="not-italic" data-rise>
+        <p class="display text-h3">{c.endereco.rua}</p>
+        <p class="mt-2 text-argila">{c.endereco.bairro} · {c.endereco.cidade}, {c.endereco.uf}</p>
+        <dl class="mt-8 grid gap-1 border-t border-argila/30 pt-6">
+          {c.horarios.map((h) => (
+            <div class="flex justify-between gap-4"><dt>{h.dias}</dt><dd class="text-argila">{h.horas}</dd></div>
+          ))}
+        </dl>
+        <ul class="mt-6 grid gap-2 border-t border-argila/30 pt-6" role="list">
+          <li><a class="link-u" href={telHref}>{c.telefoneExibicao}</a></li>
+          <li><a class="link-u" href={c.instagramUrl} target="_blank" rel="noopener">{c.instagram}</a></li>
+        </ul>
+      </address>
+
+      <div class="mapa mt-10" data-mapa={mapaSrc} data-titulo={a.mapa.titulo} data-rise>
+        <button type="button" class="mapa-btn">
+          <Icon name="map-pin" class="text-[1.5rem] text-terracota" />
+          <span class="font-medium">{a.mapa.botao}</span>
+          <span class="text-[0.875rem] text-argila">{c.endereco.rua}, {c.endereco.bairro}</span>
+        </button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .field { display: grid; gap: 0.5rem; align-content: start; min-width: 0; border: 0; padding: 0; margin: 0; }
+  .field label, .field legend { font-weight: 500; font-size: 0.9375rem; }
+  .field legend { margin-bottom: 0.5rem; }
+  .field input:not([type='radio']), .field select, .field textarea {
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-linho);
+    border: 1px solid rgb(106 93 82 / 0.55);
+    border-radius: var(--radius-sm);
+    color: var(--color-cafe);
+    font: inherit;
+    transition: border-color 0.2s;
+  }
+  .field textarea { resize: vertical; min-height: 7rem; }
+  .field ::placeholder { color: var(--color-argila); opacity: 1; }
+  .field input:hover, .field select:hover, .field textarea:hover { border-color: var(--color-argila); }
+  .field :focus-visible { outline: 2px solid var(--color-terracota); outline-offset: 2px; border-color: var(--color-cafe); }
+  .field [aria-invalid='true'] { border-color: var(--color-terracota); box-shadow: inset 0 0 0 1px var(--color-terracota); }
+  .select { position: relative; }
+  .select select { appearance: none; padding-right: 2.75rem; }
+  .select :global(.select-caret) { position: absolute; right: 1rem; top: 50%; translate: 0 -50%; pointer-events: none; color: var(--color-argila); }
+  .erro { color: var(--color-terracota); font-size: 0.875rem; font-weight: 500; min-height: 0; }
+  .erro:empty { display: none; }
+
+  .periodos { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .periodo { position: relative; cursor: pointer; }
+  .periodo input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .periodo span {
+    display: inline-flex; align-items: center; min-height: 3rem; padding: 0 1.25rem;
+    border: 1px solid rgb(106 93 82 / 0.55); border-radius: var(--radius-sm);
+    background: var(--color-linho); font-weight: 500;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .periodo input:checked + span { background: var(--color-cafe); color: var(--color-linho); border-color: var(--color-cafe); }
+  .periodo input:focus-visible + span { outline: 2px solid var(--color-terracota); outline-offset: 2px; }
+  fieldset[aria-invalid='true'] .periodo span { border-color: var(--color-terracota); }
+
+  .mapa { aspect-ratio: 4 / 3; border-radius: var(--radius-sm); overflow: hidden; background: var(--color-linho); outline: 1px solid rgb(106 93 82 / 0.3); outline-offset: -1px; }
+  .mapa-btn { display: grid; place-content: center; justify-items: center; gap: 0.5rem; width: 100%; height: 100%; text-align: center; padding: 1.5rem; cursor: pointer; }
+  .mapa-btn:hover span:nth-child(2) { color: var(--color-terracota); }
+  .mapa :global(iframe) { width: 100%; height: 100%; border: 0; display: block; }
+</style>
+
+<script>
+  const form = document.getElementById('form-agendar') as HTMLFormElement | null;
+  if (form) {
+    const msg = JSON.parse(form.dataset.msg!);
+    const whats = form.querySelector<HTMLInputElement>('#f-whats')!;
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+
+    // Máscara BR: (16) 99999-0000 / (16) 3333-0000
+    const mask = (v: string) => {
+      const d = v.replace(/\D/g, '').slice(0, 11);
+      if (d.length <= 2) return d.length ? `(${d}` : '';
+      if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+      if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+      return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+    };
+    whats.addEventListener('input', () => { whats.value = mask(whats.value); });
+
+    const setError = (el: HTMLElement, errId: string, bad: boolean) => {
+      const p = document.getElementById(errId)!;
+      el.setAttribute('aria-invalid', String(bad));
+      p.textContent = bad ? p.dataset.msg! : '';
+      return !bad;
+    };
+
+    const check = () => {
+      const nome = form.nome as HTMLInputElement;
+      const trat = form.tratamento as HTMLSelectElement;
+      const periodoSet = form.querySelector('fieldset')!;
+      const digits = whats.value.replace(/\D/g, '');
+      const res = [
+        { el: nome as HTMLElement, ok: setError(nome, 'e-nome', nome.value.trim().length < 2) },
+        { el: whats as HTMLElement, ok: setError(whats, 'e-whats', digits.length < 10 || digits.length > 11) },
+        { el: trat as HTMLElement, ok: setError(trat, 'e-trat', !trat.value) },
+        { el: periodoSet.querySelector('input') as HTMLElement, ok: setError(periodoSet, 'e-periodo', !form.querySelector('input[name="periodo"]:checked')) },
+      ];
+      return res.find((r) => !r.ok)?.el ?? null;
+    };
+
+    form.addEventListener('change', (e) => {
+      if ((e.target as HTMLElement).closest('[aria-invalid="true"]') || form.querySelector('[aria-invalid="true"]')) check();
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      const firstBad = check();
+      if (firstBad) { firstBad.focus(); return; }
+      const fd = new FormData(form);
+      const linhas = [
+        msg.abertura,
+        `${msg.nome}: ${String(fd.get('nome')).trim()}`,
+        `${msg.whatsapp}: ${fd.get('whatsapp')}`,
+        `${msg.tratamento}: ${fd.get('tratamento')}`,
+        `${msg.periodo}: ${fd.get('periodo')}`,
+      ];
+      const extra = String(fd.get('mensagem') ?? '').trim();
+      if (extra) linhas.push(`${msg.mensagem}: ${extra}`);
+      const url = `https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(linhas.join('\n'))}`;
+      const win = window.open(url, '_blank', 'noopener');
+      if (!win) window.location.href = url;
+      status.textContent = status.dataset.msg!;
+    });
+  }
+
+  // Mapa: facade clicável, iframe só sob demanda
+  const mapa = document.querySelector<HTMLElement>('[data-mapa]');
+  mapa?.querySelector('button')?.addEventListener('click', () => {
+    const f = document.createElement('iframe');
+    f.src = mapa.dataset.mapa!;
+    f.title = mapa.dataset.titulo!;
+    f.loading = 'lazy';
+    f.referrerPolicy = 'no-referrer-when-downgrade';
+    mapa.replaceChildren(f);
+    f.focus();
+  }, { once: true });
+</script>

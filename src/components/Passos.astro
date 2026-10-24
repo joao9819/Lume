@@ -1,0 +1,33 @@
+---
+import clinica from '../data/clinica.json';
+import Title from './Title.astro';
+const p = clinica.passos;
+---
+<section id="como-funciona" class="bg-linho py-[var(--spacing-section)]" aria-labelledby="passos-titulo">
+  <div class="wrap">
+    <Title id="passos-titulo" lines={p.titulo} />
+    <!-- Degraus: cada passo recua um pouco mais, no ritmo "sem pressa" -->
+    <ol class="mt-14 lg:mt-20">
+      {p.itens.map((s, i) => (
+        <li class="passo grid grid-cols-1 items-start gap-x-6 gap-y-2 border-t sm:grid-cols-[auto_minmax(0,1fr)] border-argila/30 py-8 md:gap-x-10 lg:py-10" style={`--i:${i}`} data-rise>
+          <span class="ital passo-num" aria-hidden="true">{s.numero}</span>
+          <div class="sm:pt-2 md:pt-4">
+            <h3 class="display text-h3"><span class="sr-only">{s.numero}. </span>{s.nome}</h3>
+            <p class="measure mt-3 text-argila">{s.texto}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .passo-num {
+    font-size: clamp(3.5rem, 2.5rem + 5vw, 7.5rem);
+    line-height: 0.85;
+    min-width: 1.6em;
+  }
+  @media (min-width: 1024px) {
+    .passo { margin-left: calc(var(--i) * 16.66%); }
+  }
+</style>

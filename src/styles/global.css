@@ -193,3 +193,13 @@
 .motion [data-hero-card],
 .motion [data-rise] { opacity: 0; }
 .motion [data-slit] { clip-path: inset(0 42% 0 42% round 8vw 8vw 0 0); }
+
+@layer components {
+  /* Janela em arco: topo semicircular (exceção ao raio máx. de 4px) */
+  .arch-frame {
+    overflow: hidden;
+    border-radius: 999rem 999rem 0 0;
+    background: var(--color-areia);
+  }
+  .on-cafe .arch-frame { background: #3a312c; }
+}
