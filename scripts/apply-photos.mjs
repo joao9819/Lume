@@ -5,7 +5,7 @@
 import sharp from 'sharp';
 import fs from 'fs';
 
-const meta = JSON.parse(fs.readFileSync('.photo-scratch/picks-meta.json', 'utf8'));
+const meta = JSON.parse(fs.readFileSync('scripts/photo-picks-meta.json', 'utf8'));
 const uso = {
   hero: ['Hero (janela em arco que abre)', 2400],
   ritual: ['Ritual de Luz', 1600],
@@ -19,14 +19,21 @@ const uso = {
   'equipe-helena': ['Equipe: Helena Prado (personagem fictícia)', 1200],
   'equipe-marina': ['Equipe: Marina Lopes (personagem fictícia)', 1200],
 };
-const flip = new Set(JSON.parse(process.env.FLIP ?? '[]'));
+// Hero: espelhado e recortado para o rosto cair dentro da janela em arco (colunas 8–12)
+const ajustes = {
+  hero: async (img) => {
+    const flopped = await img.flop().toBuffer();
+    const { width, height } = await sharp(flopped).metadata();
+    return sharp(flopped).extract({ left: 0, top: 0, width: Math.round(width * 0.73), height });
+  },
+};
 const utm = '?utm_source=lume&utm_medium=referral';
 const rows = [];
 for (const [name, m] of Object.entries(meta)) {
   const src = `.photo-scratch/raw/${name}.jpg`;
   if (!fs.existsSync(src)) { console.log('falta', name); continue; }
   let img = sharp(src).resize({ width: uso[name][1], withoutEnlargement: true });
-  if (flip.has(name)) img = img.flop();
+  if (ajustes[name]) img = await ajustes[name](img);
   await img
     .recomb([[1.04, 0.02, 0], [0.01, 1.0, 0], [0, 0.02, 0.92]])
     .modulate({ saturation: 0.94, brightness: 1.01 })

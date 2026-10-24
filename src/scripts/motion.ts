@@ -67,8 +67,10 @@ function heroWindow() {
     return archClip(w.t, w.r, w.b, w.l, w.w / 2);
   };
   // Alvo: retângulo do tamanho da janela visível (base do hero), cantos retos
+  // (no celular a foto não cobre o hero inteiro: a janela para no topo dela)
+  const pic = media.firstElementChild as HTMLElement | null;
   const to = () => {
-    const extra = Math.max(0, hero.offsetHeight - window.innerHeight);
+    const extra = Math.max(0, hero.offsetHeight - window.innerHeight, pic?.offsetTop ?? 0);
     return archClip(extra, 0, 0, 0, 0);
   };
 

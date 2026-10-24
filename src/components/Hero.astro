@@ -102,7 +102,19 @@ const h = clinica.hero;
   }
   .hero-media :global(.hero-img) {
     object-fit: cover;
-    object-position: var(--focus, 72% 40%);
+    object-position: 81% 50%;
+  }
+  /* Celular: foto ancorada na base, mais alta que a tela, para o rosto cair no arco */
+  @media (max-width: 1023.98px) {
+    .hero-media :global(.hero-pic) {
+      position: absolute;
+      inset: auto 0 -20svh 0;
+      height: 100svh;
+    }
+    .hero-media :global(.hero-img) { object-position: 62% 50%; }
+  }
+  @media (min-width: 1024px) {
+    .hero-media :global(.hero-img) { object-position: 58% 40%; }
   }
   .hero-window {
     position: absolute;
