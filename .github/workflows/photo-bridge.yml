@@ -1,0 +1,22 @@
+# Temporário: baixa fotos do Unsplash (URLs públicas, sem chave) para a curadoria. Removido ao final.
+name: photo-bridge
+on:
+  push:
+    paths: ['.photo-scratch/request.json']
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm i --no-save --prefix /tmp/b sharp@0.33.5
+      - run: NODE_PATH=/tmp/b/node_modules node .photo-scratch/bridge.cjs
+      - run: |
+          git config user.name "photo-bridge"
+          git config user.email "actions@users.noreply.github.com"
+          git add .photo-scratch
+          git commit -m "photo-bridge: resultado" || exit 0
+          git pull --rebase && git push
