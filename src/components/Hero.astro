@@ -113,8 +113,22 @@ const h = clinica.hero;
     }
     .hero-media :global(.hero-img) { object-position: 80% 50%; }
   }
+  /* Desktop: foto alinhada pelo topo logo abaixo do header, mais alta que a tela para
+     permitir recorte lateral; assim a cabeça fica no centro do arco e na janela aberta */
   @media (min-width: 1024px) {
-    .hero-media :global(.hero-img) { object-position: 58% 40%; }
+    .hero-media :global(.hero-pic) {
+      position: absolute;
+      inset: var(--pic-top, 4.5rem) 0 auto 0;
+      height: calc((100svh - 4.5rem) * 1.4);
+    }
+    .hero-media :global(.hero-img) { object-position: 0% 0%; }
+  }
+  /* Telas baixas: hero compacto para caber em 100svh */
+  @media (min-width: 1024px) and (max-height: 880px) {
+    .hero-content { padding-top: calc(4.5rem + 4svh); }
+    .hero :global(.hero-h1) { font-size: min(var(--text-h1), 10svh); margin-top: 2.5svh; }
+    .hero-text p, .hero-text > div > div { margin-top: 2.5svh; }
+    .hero-text { gap: 1.5rem; }
   }
   .hero-window {
     position: absolute;

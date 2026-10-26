@@ -74,6 +74,14 @@ function heroWindow() {
     return archClip(extra, 0, 0, 0, 0);
   };
 
+  // Desktop: na janela aberta a foto começa logo abaixo do header, mesmo se o hero for mais alto que a tela
+  const placePic = () => {
+    const desktop = window.matchMedia('(min-width: 1024px)').matches;
+    media.style.setProperty('--pic-top', desktop ? `${Math.max(72, hero.offsetHeight - window.innerHeight + 72)}px` : '');
+  };
+  placePic();
+  ScrollTrigger.addEventListener('refreshInit', placePic);
+
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: {
