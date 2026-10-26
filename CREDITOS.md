@@ -1,12 +1,12 @@
 # Créditos das fotos
 
-Todas as fotos são do [Unsplash](https://unsplash.com/?utm_source=lume&utm_medium=referral), sob a [Licença Unsplash](https://unsplash.com/license) (uso gratuito, inclusive comercial, sem exigência de atribuição; creditamos mesmo assim). Todas receberam o mesmo tratamento (leve aquecimento, saturação -6%) para parecer um ensaio só.
+A foto do hero é do [StockSnap](https://stocksnap.io), em domínio público ([CC0](https://creativecommons.org/publicdomain/zero/1.0/)). As demais são do [Unsplash](https://unsplash.com/?utm_source=lume&utm_medium=referral), sob a [Licença Unsplash](https://unsplash.com/license). As duas licenças permitem uso gratuito, inclusive comercial, sem exigência de atribuição; creditamos mesmo assim. Todas receberam o mesmo tratamento (leve aquecimento, saturação -6%) para parecer um ensaio só.
 
 As pessoas fotografadas não têm relação com a Lume. Nomes da equipe e depoimentos são fictícios.
 
 | Uso | Arquivo | Autor | Foto |
 | --- | --- | --- | --- |
-| Hero (janela em arco que abre) | `src/assets/hero.jpg` | [Vinicius das Neves](https://unsplash.com/@viniciusneves?utm_source=lume&utm_medium=referral) | [I54K0EzVhKw](https://unsplash.com/photos/a-close-up-of-a-person-with-a-city-in-the-background-I54K0EzVhKw?utm_source=lume&utm_medium=referral) |
+| Hero (janela em arco que abre) | `src/assets/hero.jpg` | [Authentic Stock](https://stocksnap.io/author/authentic) (StockSnap, CC0) | [CUGFVFAI24](https://stocksnap.io/photo/woman-bathtub-CUGFVFAI24) |
 | Ritual de Luz | `src/assets/ritual.jpg` | [Rosalie Gdy](https://unsplash.com/@rosaliegdy?utm_source=lume&utm_medium=referral) | [c-cC9DnjpqA](https://unsplash.com/photos/hands-massaging-temples-during-facial-massage-c-cC9DnjpqA?utm_source=lume&utm_medium=referral) |
 | A clínica | `src/assets/ambiente.jpg` | [Caroline Badran](https://unsplash.com/@___atmos?utm_source=lume&utm_medium=referral) | [Os53eXcWy2I](https://unsplash.com/photos/a-neutral-toned-sofa-with-a-textured-vase-Os53eXcWy2I?utm_source=lume&utm_medium=referral) |
 | Limpeza de Pele Profunda | `src/assets/tratamento-limpeza.jpg` | [kimia kazemi](https://unsplash.com/@kimick?utm_source=lume&utm_medium=referral) | [J6Hg_YH2tFk](https://unsplash.com/photos/womans-face-with-cleansing-foam-during-facial-treatment-J6Hg_YH2tFk?utm_source=lume&utm_medium=referral) |

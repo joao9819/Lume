@@ -19,14 +19,8 @@ const uso = {
   'equipe-helena': ['Equipe: Helena Prado (personagem fictícia)', 1200],
   'equipe-marina': ['Equipe: Marina Lopes (personagem fictícia)', 1200],
 };
-// Hero: espelhado e recortado para o rosto cair dentro da janela em arco (colunas 8–12)
-const ajustes = {
-  hero: async (img) => {
-    const flopped = await img.flop().toBuffer();
-    const { width, height } = await sharp(flopped).metadata();
-    return sharp(flopped).extract({ left: 0, top: 0, width: Math.round(width * 0.73), height });
-  },
-};
+// Ajustes por foto antes do tratamento (o hero atual, do StockSnap, entra sem recorte)
+const ajustes = {};
 const utm = '?utm_source=lume&utm_medium=referral';
 const rows = [];
 for (const [name, m] of Object.entries(meta)) {
@@ -39,7 +33,9 @@ for (const [name, m] of Object.entries(meta)) {
     .modulate({ saturation: 0.94, brightness: 1.01 })
     .jpeg({ quality: 86, mozjpeg: true })
     .toFile(`src/assets/${name}.jpg`);
-  rows.push(`| ${uso[name][0]} | \`src/assets/${name}.jpg\` | [${m.user}](https://unsplash.com/@${m.username}${utm}) | [${m.id}](${m.html}${utm}) |`);
+  rows.push(m.source === 'StockSnap'
+    ? `| ${uso[name][0]} | \`src/assets/${name}.jpg\` | [${m.user}](https://stocksnap.io/author/${m.username}) (StockSnap, CC0) | [${m.id}](${m.html}) |`
+    : `| ${uso[name][0]} | \`src/assets/${name}.jpg\` | [${m.user}](https://unsplash.com/@${m.username}${utm}) | [${m.id}](${m.html}${utm}) |`);
   console.log('ok', name);
 }
 fs.writeFileSync('CREDITOS.md', `# Créditos das fotos
